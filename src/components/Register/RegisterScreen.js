@@ -35,11 +35,11 @@ const RegisterScreen = ({ navigation }) => {
             style={{ flex: 1 }}
         >
             <View style={styles.container}>
-                <Text style={{ fontSize: 25, textAlign: "center" }}>ĐĂNG KÝ TÀI KHOẢN</Text>
+                <Text style={{ fontSize: 25, textAlign: "center" }}>SIGN UP NEW ACCOUNT</Text>
                 <View style={styles.container2}>
                     <Input
                         onChangeText={(text) => setEnteredPhoneNumber(text)}
-                        placeholder="User Name"
+                        placeholder="UserName"
                     />
                     <Input
                         onChangeText={(text) => setEnteredEmail(text)}
@@ -53,12 +53,12 @@ const RegisterScreen = ({ navigation }) => {
                         secureTextEntry={true}
                     />
                     <TouchableOpacity style={styles.button} onPress={registerhandler}>
-                        <Text style={styles.buttonText}>ĐĂNG KÝ</Text>
+                        <Text style={styles.buttonText}>SIGN UP</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ marginTop: 30, marginRight: 100 }}>
                     <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                        <Text style={styles.ttxt}>ĐÃ CÓ TÀI KHOẢN! ĐĂNG NHẬP</Text>
+                        <Text style={styles.ttxt}>HAVE ACCOUNT! LOG IN</Text>
                     </TouchableOpacity>
 
                 </View>

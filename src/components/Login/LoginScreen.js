@@ -87,7 +87,7 @@ const LoginScreen = ({ navigation }) => {
                     // console.log("");
                 }).catch(e => {
 
-                    Alert.alert("Sai tài khoản hoặc mật khẩu vui lòng nhập lại")
+                    Alert.alert("Wrong account or password, please re-enter")
                 })
             }
             catch (error) {
@@ -115,7 +115,7 @@ const LoginScreen = ({ navigation }) => {
                         secureTextEntry={true}
                     />
                     <TouchableOpacity style={styles.buttonLogin} onPress={loginHandler}>
-                        <Text style={styles.buttonLoginText}>ĐĂNG NHẬP</Text>
+                        <Text style={styles.buttonLoginText}>LOG IN</Text>
                     </TouchableOpacity>
 
 
@@ -126,10 +126,10 @@ const LoginScreen = ({ navigation }) => {
 
                 <View style={{ marginTop: 20, marginRight: 150 }}>
                     <TouchableOpacity onPress={() => navigation.navigate("ForgotPass")}>
-                        <Text style={styles.ttxt}>QUÊN MẬT KHẨU</Text>
+                        <Text style={styles.ttxt}>FORGOT PASSWORD</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{ marginTop: 10 }} onPress={() => navigation.navigate("Register")}>
-                        <Text style={styles.ttxt}>ĐĂNG KÝ TÀI KHOẢN</Text>
+                        <Text style={styles.ttxt}>SIGN UP NEW ACCOUNT</Text>
                     </TouchableOpacity>
                 </View>
             </View>

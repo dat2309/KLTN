@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API from "../../../API";
 import {
     Alert,
@@ -8,76 +8,178 @@ import {
     Text,
     View,
     TouchableOpacity,
+    ScrollView,
 } from "react-native";
-import { Button, Input } from "react-native-elements";
-
+import {
+    FontAwesome,
+    FontAwesome5,
+    Ionicons,
+    MaterialCommunityIcons,
+    Fontisto,
+} from "@expo/vector-icons";
+import { Button, Input, ListItem, Avatar } from "react-native-elements";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { interpolate } from "react-native-reanimated";
 const CartScreen = ({ navigation }) => {
 
-    const [enteredName, setEnteredName] = useState("");
+    const [totalPrice, setTotalPrice] = useState(0);
     const [enteredPass, setEnteredPass] = useState("");
+    const [cartItem, setCartItem] = useState([])
+    const [list, setList] = useState([{
 
-    const loginHandler = async () => {
-        if (enteredPass === "" || enteredName === "") {
-            Alert.alert("Chưa điền đầy đủ thông tin!");
+        name: 'Amy ',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+        subtitle: 'Vice President',
+        tag: "S",
+        quantity: 1,
+        proId: "132154adasd",
+        price: 1
+    },
+    {
+        name: 'Chris',
+        avatar_url: 'https://drive.google.com/file/d/1vxJ4GF1fDUzQV5PXkcEYVvr01SlGef3k/view?usp=sharing',
+        subtitle: 'Vice Chairman',
+        tag: "S",
+        quantity: "1",
+        proId: "132154adasd",
+        price: 1
+    }, {
+        name: 'Chris',
+        avatar_url: 'https://drive.google.com/file/d/1vxJ4GF1fDUzQV5PXkcEYVvr01SlGef3k/view?usp=sharing',
+        subtitle: 'Vice Chairman',
+        tag: "S",
+        quantity: "1",
+        proId: "132154adasd",
+        price: "5400"
+    },
+    {
+        name: 'Chris',
+        avatar_url: 'https://drive.google.com/file/d/1vxJ4GF1fDUzQV5PXkcEYVvr01SlGef3k/view?usp=sharing',
+        subtitle: 'Vice Chairman',
+        tag: "S",
+        quantity: "1",
+        proId: "132154adasd",
+        price: "5400"
+    }, {
+        name: 'Chris',
+        avatar_url: 'https://drive.google.com/file/d/1vxJ4GF1fDUzQV5PXkcEYVvr01SlGef3k/view?usp=sharing',
+        subtitle: 'Vice Chairman',
+        tag: "S",
+        quantity: "1",
+        proId: "132154adasd",
+        price: "5400"
+    },
+    ]);
+    function total() {
+        let sum = 0
+        for (let i = 0; i <= list.length; i++) {
 
-        } else {
-            try {
-                const url = "/api/user/authentication";
-                API.post(url, { userName: enteredName, password: enteredPass }).then(res => {
-                    console.log(res.data);
-                    navigation.navigate("CreateProfile", { token: res.data.token });
-                    // Alert.alert(res.data.token);
-                    // if (res.data.message == "Register is success, active key sent your email")
-                    // console.log("");
-                })
-            }
-            catch (error) {
-                console.log(error);
-            }
+            console.log(list[i])
         }
+        setTotalPrice(sum)
+    }
+    const getCartItem = async () => {
+        try {
+            const ak = await AsyncStorage.getItem('cart')
+            if (ak !== null) {
+                console.log("local cart: " + ak)
+            }
+            else
+                console.log("đéo có")
+        } catch (e) { }
     };
+
+    useEffect(() => {
+
+        // getCartItem()
+        total();
+
+    });
     return (
         <KeyboardAvoidingView style={{ flex: 1 }}>
+
             <View style={styles.container}>
+                <ScrollView>
+                    <View style={{
+                        height: "100%",
+                        width: "100%",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "white",
+                    }}>
+                        <View style={{
+                            marginTop: 20, flexDirection: 'column', marginLeft: 30, flex: 1,
+                            flexDirection: 'column',
 
-                <Image
-                    style={styles.image}
-                    source={require("../../image/logo.png")}
-                />
-                <View style={styles.container2}>
-                    <Input
-                        onChangeText={(text) => setEnteredName(text)}
-                        placeholder="User Name"
-                    />
-                    <Input
-                        onChangeText={(text) => setEnteredPass(text)}
-                        placeholder="Password"
-                        secureTextEntry={true}
-                    />
-                    <TouchableOpacity style={styles.buttonLogin} onPress={loginHandler}>
-                        <Text style={styles.buttonLoginText}>ĐĂNG NHẬP</Text>
-                    </TouchableOpacity>
+                            alignItems: 'flex-start',
 
+                        }}>
+                            {
+                                list.map((l, i) => (
 
-                </View>
+                                    <ListItem key={i} style={{ width: "100%" }}>
 
+                                        <View style={stylesss.subtitleView}>
+                                            <TouchableOpacity
+                                            ><View style={{
+                                                display: "flex",
+                                                flexDirection: "row",
+                                                borderRadius: 10,
+                                                borderWidth: 1,
+                                                borderColor: "black",
+                                                padding: 10
+                                            }}>
+                                                    {/* <Avatar source={{ uri: l.image }} style={stylesss.ratingImage} /> */}
+                                                    <View style={{ marginRight: 5, width: "35%" }}>
+                                                        <Image source={require("../../image/logo.png")} style={stylesss.ratingImage} />
+                                                    </View>
 
+                                                    <View style={{ marginRight: 5, width: "30%" }}>
+                                                        <Text>{l.name}</Text>
+                                                        <Text>{l.price}</Text>
+                                                        <Text>{l.quantity}</Text>
+                                                        <Text>{l.tag}</Text>
+                                                    </View>
+                                                    <View>
+                                                        <Ionicons name="trash" size={30} style={{ marginLeft: 50, marginTop: 30 }} />
+                                                    </View>
+                                                </View>
+                                            </TouchableOpacity>
+                                        </View>
 
+                                    </ListItem>
+                                ))
+                            }
+                        </View>
 
-                <View style={{ marginTop: 20, marginRight: 150 }}>
-                    <TouchableOpacity onPress={() => Alert.alert("Quên MK")}>
-                        <Text style={styles.ttxt}>QUÊN MẬT KHẨU</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ marginTop: 10 }} onPress={() => navigation.navigate("Register")}>
-                        <Text style={styles.ttxt}>ĐĂNG KÝ </Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </KeyboardAvoidingView>
+                        <Text style={{ marginTop: 100 }}>Total: {totalPrice}</Text>
+                        <Text style={styles.buttonLogin} onPress={() => log()}>Add to cart</Text>
+
+                    </View>
+
+                </ScrollView>
+            </View >
+
+        </KeyboardAvoidingView >
     );
 };
 
 export default CartScreen;
+const stylesss = StyleSheet.create({
+    subtitleView: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: "100%",
+    },
+    ratingImage: {
+        height: 100,
+        width: 100
+    },
+    ratingText: {
+        paddingLeft: 10,
+        color: 'grey'
+    }
+})
 const TEXT = {
     color: "#fff",
     textAlign: "center",
@@ -87,7 +189,7 @@ const styles = StyleSheet.create({
         height: "100%",
         width: "100%",
         alignItems: "center",
-        justifyContent: "center",
+        // justifyContent: "center",
         backgroundColor: "white",
     },
     button: {
@@ -100,11 +202,17 @@ const styles = StyleSheet.create({
     },
 
     buttonLogin: {
-        height: 50,
+        height: 35,
         borderRadius: 25,
+        width: "80%",
+        marginLeft: 30,
         backgroundColor: "#884EC6",
         justifyContent: "center",
         marginTop: 15,
+        fontSize: 20,
+        color: "#fff",
+        textAlign: "center",
+        marginBottom: 20
     },
     buttonLoginText: {
         ...TEXT,
@@ -120,7 +228,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     container2: {
-        width: "80%",
+        width: "100%",
         marginTop: 50,
     },
+
 });

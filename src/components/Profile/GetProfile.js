@@ -77,32 +77,32 @@ const GetProfile = ({ route, navigation }) => {
         >
             <View style={styles.container}>
                 <ScrollView>
-                    <Ionicons name="arrow-back-outline" size={30} style={{ textAlign: "left", marginTop: 60 }} onPress={() => navigation.navigate("Tab")} />
+                    <Ionicons name="arrow-back-outline" size={30} style={{ textAlign: "left", marginTop: 60, marginLeft: 15 }} onPress={() => navigation.navigate("Tab")} />
                     <View>
                         <View style={{ alignItems: "center", }}>
-                            <Text style={{ fontSize: 25, textAlign: "center", marginTop: 20 }}>Thông tin cá nhân</Text>
+                            <Text style={{ fontSize: 25, textAlign: "center", marginTop: 20 }}>Personal information</Text>
                             <View style={styles.container2}>
                                 <Text></Text>
                                 <Text></Text>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text style={{ width: "20%", fontSize: 20 }}>Name: </Text>
-                                    <Text style={{ backgroundColor: "#E5E5E5", width: "80%", fontSize: 20, borderRadius: 10, textAlign: "center" }} >{route.params.name}</Text></View>
+                                    <Text style={styles.addLabel}>Name: </Text>
+                                    <Text style={styles.addTilte} >{route.params.name}</Text></View>
                                 <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                                    <Text style={{ width: "20%", fontSize: 20 }}>Phone: </Text>
-                                    <Text style={{ backgroundColor: "#E5E5E5", width: "80%", fontSize: 20, borderRadius: 10, textAlign: "center" }}>{route.params.phone}</Text></View>
-                                <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                                    <Text style={{ width: "20%", fontSize: 20 }}>Gender: </Text>
-                                    <Text style={{ backgroundColor: "#E5E5E5", width: "80%", fontSize: 20, borderRadius: 10, textAlign: "center" }}> {route.params.gender}</Text></View>
+                                    <Text style={styles.addLabel}>Phone: </Text>
+                                    <Text style={styles.addTilte}>{route.params.phone}</Text></View>
+                                <View style={{ flexDirection: 'row', marginTop: 10, }}>
+                                    <Text style={styles.addLabel}>Gender: </Text>
+                                    <Text style={styles.addTilte}> {route.params.gender}</Text></View>
 
 
                                 {
                                     route.params.list.map((l, i) => (
 
                                         <ListItem key={i} style={{ marginLeft: 0, padding: 0 }}>
-                                            <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: -16 }}>
-                                                <Text style={{ width: "25%", fontSize: 20, }}>Address: </Text>
+                                            <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: -16, marginRight: 20 }}>
+                                                <Text style={{ width: "25%", fontSize: 20, marginLeft: 10 }}>Address: </Text>
                                                 <Text style={{ backgroundColor: "#E5E5E5", width: "75%", fontSize: 20, borderRadius: 10, textAlign: "center" }} onPress={() => navigation.navigate("UpdateAddress", { idAdd: l.id })}>{l.street + "," + l.ward + "," + l.district + "," + l.province}</Text>
-                                                <Ionicons name="create" size={30} style={{ marginLeft: -25, padding: 0 }} onPress={() => navigation.navigate("UpdateAddress", { idAdd: l.id })} /></View>
+                                                <Ionicons name="create" size={30} style={{ marginLeft: -22, padding: 0 }} onPress={() => navigation.navigate("UpdateAddress", { idAdd: l.id })} /></View>
                                         </ListItem>
                                     ))
                                 }
@@ -111,9 +111,9 @@ const GetProfile = ({ route, navigation }) => {
                             </View>
                         </View>
                         <TouchableOpacity style={styles.button} onPress={() => Alert.alert("chưa có")}>
-                            <Text style={styles.buttonText}>Cập nhật thông tin</Text>
+                            <Text style={styles.buttonText}>Update information</Text>
                         </TouchableOpacity>
-                        <Ionicons name="add-circle-outline" size={20} style={{ textAlign: "left", marginTop: 60 }} onPress={() => navigation.navigate("AddAddress")}>Thêm địa chỉ</Ionicons>
+                        <Ionicons name="add-circle-outline" size={20} style={{ textAlign: "left", marginTop: 40, marginLeft: 15 }} onPress={() => navigation.navigate("AddAddress")}>Add Address</Ionicons>
 
 
                     </View>
@@ -187,5 +187,11 @@ const styles = StyleSheet.create({
     },
     inputStyleic: {
         flex: 1,
+    },
+    addLabel: {
+        width: "20%", fontSize: 20, marginLeft: 10
+    },
+    addTilte: {
+        backgroundColor: "#E5E5E5", width: "75%", fontSize: 20, borderRadius: 10, textAlign: "center"
     }
 });

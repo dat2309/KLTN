@@ -36,7 +36,7 @@ const ForgotPass = ({ navigation }) => {
             }).catch(e => {
                 console.log(e.response.status)
                 if (e.response.status === 400)
-                    Alert.alert("Vui lòng nhập lại")
+                    Alert.alert("Please re-enter")
             })
         }
         catch (error) {
@@ -57,7 +57,7 @@ const ForgotPass = ({ navigation }) => {
                     />
 
                     <TouchableOpacity style={styles.buttonLogin} onPress={forgot}>
-                        <Text style={styles.buttonLoginText}>Quên Mật Khẩu </Text>
+                        <Text style={styles.buttonLoginText}>Forgot password </Text>
                     </TouchableOpacity>
 
 

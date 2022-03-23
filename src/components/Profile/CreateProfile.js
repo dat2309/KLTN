@@ -98,7 +98,7 @@ const CreateProfile = ({ navigation }) => {
             style={{ flex: 1 }}
         >
             <View style={styles.container}>
-                <Text style={{ fontSize: 25, textAlign: "center" }} >ĐĂNG KÝ THÔNG TIN</Text>
+                <Text style={{ fontSize: 25, textAlign: "center" }} >INFORMATION REGISTRATION</Text>
                 <View style={styles.container2}>
                     <Input
                         onChangeText={(text) => setEnteredFname(text)}
@@ -133,7 +133,7 @@ const CreateProfile = ({ navigation }) => {
                     />
 
                     <TouchableOpacity style={styles.button} onPress={create}>
-                        <Text style={styles.buttonText}>ĐĂNG KÝ</Text>
+                        <Text style={styles.buttonText} onPress={create}>ACCEPT</Text>
                     </TouchableOpacity>
                 </View>
 

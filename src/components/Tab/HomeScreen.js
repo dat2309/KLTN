@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API from "../../../API";
 import {
     Alert,
@@ -15,7 +15,7 @@ import {
 import { Button, Input, ListItem, Avatar } from "react-native-elements";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const HomeScreen = ({ navigation }) => {
-
+    const [product, setProduct] = useState([""])
 
     const [list, setList] = useState([{
         name: 'Amy Farha',
@@ -38,8 +38,26 @@ const HomeScreen = ({ navigation }) => {
         subtitle: 'Vice Chairman'
     },
     ]);
-    console.log(list);
 
+    function setProducta(a) {
+        setProduct(a)
+    }
+    function getProduct() {
+        try {
+            const url = "api/product";
+            API.get(url).then(res => {
+
+                setProducta(res.data.content)
+
+            }).catch(e => {
+
+                console.log(e)
+            })
+        }
+        catch (error) {
+            console.log(error);
+        }
+    };
     const [enteredName, setEnteredName] = useState("");
     const [enteredPass, setEnteredPass] = useState("");
     const [tokenn, setTokenn] = useState("")
@@ -54,28 +72,11 @@ const HomeScreen = ({ navigation }) => {
         }
         catch (e) { }
     }
-    getToken();
-    const loginHandler = async () => {
-        if (enteredPass === "" || enteredName === "") {
-            Alert.alert("Chưa điền đầy đủ thông tin!");
 
-        } else {
-            try {
-                const url = "/api/user/authentication";
-                API.post(url, { userName: enteredName, password: enteredPass }).then(res => {
-                    console.log(res.data);
-                    navigation.navigate("CreateProfile", { token: res.data.token });
-                    // Alert.alert(res.data.token);
-                    // if (res.data.message == "Register is success, active key sent your email")
-                    // console.log("");
-                }).catch(e => {
-                })
-            }
-            catch (error) {
-                console.log(error);
-            }
-        }
-    };
+    useEffect(() => {
+        getToken();
+        getProduct();
+    });
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }}>
@@ -90,34 +91,41 @@ const HomeScreen = ({ navigation }) => {
                     <Text style={{ fontSize: 30, color: "red" }}>Wellcom to DEVT</Text>
                     <Text style={{ fontSize: 20, color: "black", marginTop: 80 }}>New Product</Text>
                     <View style={{
-                        marginTop: 20, flexDirection: 'row', marginLeft: 50, flex: 1,
-                        flexDirection: 'row',
-                        flexWrap: 'wrap',
-                        alignItems: 'flex-start',
-
+                        height: "100%",
+                        width: "100%",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "white",
                     }}>
-                        {
-                            list.map((l, i) => (
+                        <View style={{
+                            marginTop: 20, flexDirection: 'row', marginLeft: 30, flex: 1,
+                            flexDirection: 'row',
+                            flexWrap: 'wrap',
+                            alignItems: 'flex-start',
 
-                                <ListItem key={i} style={{ width: "50%" }}>
+                        }}>
+                            {
+                                product.map((l, i) => (
 
-                                    <View style={stylesss.subtitleView}>
-                                        <TouchableOpacity onPress={() => {
-                                            getToken()
-                                            console.log(tokenn)
-                                        }
-                                        }>
-                                            {/* <Avatar source={{ uri: l.avatar_url }} style={stylesss.ratingImage} /> */}
-                                            <Image source={require("../../image/logo.png")} style={stylesss.ratingImage} />
+                                    <ListItem key={i} style={{ width: "50%" }}>
 
-                                            <Text>{l.name}</Text>
-                                            <Text>{l.subtitle}</Text>
-                                        </TouchableOpacity>
-                                    </View>
+                                        <View style={stylesss.subtitleView}>
+                                            <TouchableOpacity onPress={() => {
+                                                navigation.navigate("OneProduct", { idPro: l.id })
+                                            }
+                                            }>
+                                                <Avatar source={{ uri: l.image }} style={stylesss.ratingImage} />
+                                                {/* <Image source={require("../../image/logo.png")} style={stylesss.ratingImage} /> */}
 
-                                </ListItem>
-                            ))
-                        }
+                                                <Text>{l.name}</Text>
+                                                <Text>{l.price}</Text>
+                                            </TouchableOpacity>
+                                        </View>
+
+                                    </ListItem>
+                                ))
+                            }
+                        </View>
                     </View>
                 </View>
 
@@ -132,7 +140,7 @@ const stylesss = StyleSheet.create({
     subtitleView: {
         display: 'flex',
         flexDirection: 'column',
-        width: 300,
+        width: "100%",
 
 
     },

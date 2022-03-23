@@ -20,7 +20,7 @@ const NewPass = ({ navigation }) => {
 
     const accpet = async () => {
         if (enteredPass === "" || enteredName === "" || code === "") {
-            Alert.alert("Chưa điền đầy đủ thông tin!");
+            Alert.alert("Please enter full information!");
 
         } else {
             try {
@@ -33,11 +33,11 @@ const NewPass = ({ navigation }) => {
                     if (res.data.message === "Password changed!!!!")
                         navigation.navigate("Login")
                     else
-                        Alert.alert("Vui lòng nhập lại")
+                        Alert.alert("Please enter again")
 
                 }).catch(e => {
                     if (e.response.status === 400)
-                        Alert.alert("Vui lòng nhập lại")
+                        Alert.alert("Please enter again")
                 })
             }
             catch (error) {
@@ -72,7 +72,7 @@ const NewPass = ({ navigation }) => {
 
                     />
                     <TouchableOpacity style={styles.buttonLogin} onPress={accpet}>
-                        <Text style={styles.buttonLoginText}>Xác Nhận</Text>
+                        <Text style={styles.buttonLoginText}>Confirm</Text>
                     </TouchableOpacity>
 
 

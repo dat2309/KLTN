@@ -17,7 +17,7 @@ const ActivityScreen = ({ route, navigation }) => {
 
     const activehandler = () => {
         if (enteredOTP.length != 6) {
-            Alert.alert("Chưa điền đầy đủ thông tin!");
+            Alert.alert("Please enter full information!");
         }
         else {
             Keyboard.dismiss();
@@ -42,7 +42,7 @@ const ActivityScreen = ({ route, navigation }) => {
         >
             <View style={styles.container}>
                 <View style={styles.container2}>
-                    <Text style={{ fontSize: 18, textAlign: "center" }}>Vui lòng nhập OTP đã được gửi về email</Text>
+                    <Text style={{ fontSize: 18, textAlign: "center" }}>Please enter the OTP sent to your email</Text>
                     <TextInput
                         style={styles.input}
                         errorMessage={errorMessage}
@@ -55,7 +55,7 @@ const ActivityScreen = ({ route, navigation }) => {
 
                     />
                     <TouchableOpacity style={styles.button} onPress={activehandler}>
-                        <Text style={styles.buttonText}>XÁC NHẬN</Text>
+                        <Text style={styles.buttonText}>CONFIRM</Text>
                     </TouchableOpacity>
                 </View>
 

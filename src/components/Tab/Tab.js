@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API from "../../../API";
 import {
     Image,
@@ -50,7 +50,11 @@ const Tabs = ({ navigation }) => {
         }
         catch (e) { }
     };
-    getToken();
+    useEffect(() => {
+        getToken();
+        // code.push()
+    });
+
     console.log(tokenn)
     const getPro = () => {
         getToken()
@@ -141,8 +145,8 @@ const Tabs = ({ navigation }) => {
                     headerRight: () => (
 
                         <Ionicons
-                            name="md-menu-sharp"
-                            style={{ marginLeft: 5 }}
+                            name="person"
+                            style={{ marginRight: 15 }}
                             size={30}
                             color="#2089dc"
                             onPress={getProfile}
@@ -171,7 +175,7 @@ const Tabs = ({ navigation }) => {
 
                         <Ionicons
                             name="md-menu-sharp"
-                            style={{ marginLeft: 5 }}
+                            style={{ marginRight: 15 }}
                             size={30}
                             color="#2089dc"
                             onPress={getProfile}
@@ -205,7 +209,7 @@ const Tabs = ({ navigation }) => {
 
                         <Ionicons
                             name="md-menu-sharp"
-                            style={{ marginLeft: 5 }}
+                            style={{ marginRight: 15 }}
                             size={30}
                             color="#2089dc"
                             onPress={getProfile}

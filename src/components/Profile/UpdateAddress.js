@@ -103,35 +103,36 @@ const UpdateAddress = ({ route, navigation }) => {
         >
             <View style={styles.container}>
                 <Ionicons name="arrow-back-outline" size={30} style={{ textAlign: "left", marginTop: 60 }} onPress={() => navigation.navigate("Tab")} />
-                <Text style={{ fontSize: 25, textAlign: "center" }}>Cập Nhật Địa Chỉ</Text>
-                <View style={styles.container2}>
-                    <Input
-                        onChangeText={(text) => setEnteredStreet(text)}
-                        placeholder="Street"
+                <View style={{ alignItems: "center" }}>
+                    <Text style={{ fontSize: 25, textAlign: "center" }}>Update Address</Text>
+                    <View style={styles.container2}>
+                        <Input
+                            onChangeText={(text) => setEnteredStreet(text)}
+                            placeholder="Street"
 
-                    />
-                    <Input
-                        onChangeText={(text) => setEnteredWard(text)}
-                        placeholder="Ward "
+                        />
+                        <Input
+                            onChangeText={(text) => setEnteredWard(text)}
+                            placeholder="Ward "
 
-                    />
+                        />
 
-                    <Input
-                        onChangeText={(text) => setEnteredDistrict(text)}
-                        placeholder="District"
+                        <Input
+                            onChangeText={(text) => setEnteredDistrict(text)}
+                            placeholder="District"
 
-                    />
+                        />
 
-                    <Input
-                        onChangeText={(text) => setEnteredProvince(text)}
-                        placeholder="Province"
+                        <Input
+                            onChangeText={(text) => setEnteredProvince(text)}
+                            placeholder="Province"
 
-                    />
-                    <TouchableOpacity style={styles.button} onPress={update}>
-                        <Text style={styles.buttonText}>Cập nhật</Text>
-                    </TouchableOpacity>
+                        />
+                        <TouchableOpacity style={styles.button} onPress={update}>
+                            <Text style={styles.buttonText}>Accept</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-
 
             </View>
         </KeyboardAvoidingView>

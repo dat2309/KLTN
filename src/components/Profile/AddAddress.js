@@ -12,6 +12,14 @@ import {
     Keyboard,
     TouchableOpacity
 } from "react-native";
+import {
+    FontAwesome,
+    FontAwesome5,
+    Ionicons,
+    Entypo,
+    MaterialCommunityIcons,
+    Fontisto,
+} from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Button, Input } from "react-native-elements";
 import SwitchSelector from "react-native-switch-selector";
@@ -40,7 +48,7 @@ const AddAddress = ({ navigation }) => {
         catch (e) { }
     }
 
-    const create = () => {
+    function create() {
         getToken()
         Keyboard.dismiss();
         try {
@@ -86,39 +94,41 @@ const AddAddress = ({ navigation }) => {
 
     return (
         <KeyboardAvoidingView
-            style={{ flex: 1 }}
-        >
+            style={{ flex: 1 }}>
+
             <View style={styles.container}>
-                <Text style={{ fontSize: 25, textAlign: "center" }}>Cập Nhật Địa Chỉ</Text>
-                <View style={styles.container2}>
-                    <Input
-                        onChangeText={(text) => setEnteredStreet(text)}
-                        placeholder="Street"
+                <Ionicons name="arrow-back-outline" size={30} style={{ textAlign: "left", marginTop: -130, marginLeft: 15 }} onPress={() => navigation.navigate("Tab")} />
+                <View style={{ alignItems: "center", marginTop: 50 }}>
+                    <Text style={{ fontSize: 25 }}>Create Address</Text>
+                    <View style={styles.container2}>
+                        <Input
+                            onChangeText={(text) => setEnteredStreet(text)}
+                            placeholder="Street"
 
-                    />
-                    <Input
-                        onChangeText={(text) => setEnteredWard(text)}
-                        placeholder="Ward "
+                        />
+                        <Input
+                            onChangeText={(text) => setEnteredWard(text)}
+                            placeholder="Ward "
 
-                    />
+                        />
 
-                    <Input
-                        onChangeText={(text) => setEnteredDistrict(text)}
-                        placeholder="District"
+                        <Input
+                            onChangeText={(text) => setEnteredDistrict(text)}
+                            placeholder="District"
 
-                    />
+                        />
 
-                    <Input
-                        onChangeText={(text) => setEnteredProvince(text)}
-                        placeholder="Province"
+                        <Input
+                            onChangeText={(text) => setEnteredProvince(text)}
+                            placeholder="Province"
 
-                    />
-                    <TouchableOpacity style={styles.button} onPress={create}>
-                        <Text style={styles.buttonText}>ĐĂNG KÝ</Text>
-                    </TouchableOpacity>
+                        />
+                        <TouchableOpacity style={styles.button} onPress={() => create()}>
+                            <Text style={styles.buttonText} onPress={() => create()}>Accept</Text>
+                        </TouchableOpacity>
+                    </View>
+
                 </View>
-
-
             </View>
         </KeyboardAvoidingView>
     );
@@ -132,7 +142,7 @@ const styles = StyleSheet.create({
     container: {
         height: "100%",
         width: "100%",
-        alignItems: "center",
+
         justifyContent: "center",
         backgroundColor: "white",
     },
